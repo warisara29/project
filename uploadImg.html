@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>website name</title>
+    <link rel="stylesheet" href="style.css">
+    <!----bootstrap----->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <input type="checkbox" id="nav" class="hidden">
+            <label for="nav" class="nav-btn">
+            </label>
+            <div class="logo">
+                <a href="index.html">Website Name</a>
+            </div>
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="uploadImg.html">Upload Image</a></li>
+                    <li><a href="userAcct.html">User Account</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="card">
+        <div class="image-upload-wrap">
+            <div class="drag-text">
+                <p class="drag-p">Drag and drop a file or select add Image</p>
+            </div>
+        </div>
+        <div class="container-card">
+            <div class="form-group form-button">
+                <input type="submit" onclick="removeUpload()" name="signin" id="signin" class="form-submit" value="Upload Image"/>
+            </div>
+            <p class="upload-p">Upload your image</p> 
+        </div>
+    </div>
+</body>
+</html>
