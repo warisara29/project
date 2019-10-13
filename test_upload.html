@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload</title>
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src='https://unpkg.com/tesseract.js@v2.0.0-beta.1/dist/tesseract.min.js'></script>
+</head>
+<style>
+    article,
+    aside,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+</style>
+
+<body>
+    <input type='file' onchange="readURL(this);" />
+    <img id="blah" src="#" alt="your image" />
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                    Tesseract.recognize(
+                        e.target.result,
+                        'eng', {
+                            logger: m => console.log(m)
+                        }
+                    ).then(({
+                        data: {
+                            text
+                        }
+                    }) => {
+                        console.log(text);
+                        console.log(text.search("kcal"));
+                        console.log(text.substring(text.search("kcal") - 5, text.indexOf("kcal")));
+                        console.log(text.search("km"));
+                        var x = text.substring(text.search("km") - 5, text.indexOf("km"));
+                        document.body.append("runnung" + x + " kilometre");
+                    })
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
