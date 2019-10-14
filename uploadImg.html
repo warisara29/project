@@ -10,7 +10,94 @@
     <!----bootstrap----->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src='https://unpkg.com/tesseract.js@v2.0.0-beta.1/dist/tesseract.min.js'></script>
+    <style>
+        .file-upload {
+            background-color: #ffffff;
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .file-upload-btn {
+            width: 100%;
+            margin: 0;
+            color: #fff;
+            background: #1FB264;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            border-bottom: 4px solid #15824B;
+            transition: all .2s ease;
+            outline: none;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .file-upload-btn:hover {
+            background: #1AA059;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-btn:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+
+        .file-upload-content {
+            display: none;
+            text-align: center;
+        }
+
+        .file-upload-input {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .image-upload-wrap {
+            margin-top: 20px;
+            border: 4px dashed #1FB264;
+            position: relative;
+        }
+
+        .remove-image {
+            width: 200px;
+            margin: 0;
+            color: #fff;
+            background: #cd4535;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            border-bottom: 4px solid #b02818;
+            transition: all .2s ease;
+            outline: none;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .remove-image:hover {
+            background: #c13b2a;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .remove-image:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -27,23 +114,104 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="uploadImg.html">Upload Image</a></li>
                     <li><a href="userAcct.html">User Account</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
                 </ul>
             </div>
         </nav>
     </div>
     <div class="card">
+        <div style="text-align: center;color:green; margin-top: 10px; font-weight: bold;" id="status"></div>
+        <div style="text-align: center;color:royalblue; margin-top: 10px; font-weight: bold;" id="complete"></div>
         <div class="image-upload-wrap">
+            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
             <div class="drag-text">
                 <p class="drag-p">Drag and drop a file or select add Image</p>
             </div>
+
         </div>
         <div class="container-card">
             <div class="form-group form-button">
-                <input type="submit" onclick="removeUpload()" name="signin" id="signin" class="form-submit" value="Upload Image"/>
+                <input type="submit" onclick="$('.file-upload-input').trigger( 'click' )" name="signin" id="signin"
+                    class="form-submit" value="Upload Image" />
             </div>
-            <p class="upload-p">Upload your image</p> 
+            <p class="upload-p">Upload your image</p>
         </div>
-    </div>
+        <div class="file-upload-content">
+            <img class="file-upload-image" src="#" alt="your image" />
+            <div class="image-title-wrap">
+                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                        class="image-title">Uploaded Image</span></button>
+            </div>
 </body>
+
+<script>
+    function readURL(input) {
+        document.getElementById("status").hidden = true;
+        document.getElementById("complete").hidden = true;
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+
+                Tesseract.recognize(
+                    e.target.result,
+                    'eng', {
+                        logger: m => {
+                            if (m.status == "recognizing text") {
+                                document.getElementById("status").hidden = false;
+                                document.getElementById("status").textContent = "Working.." +
+                                    m.progress * 100 + "%";
+
+
+                            }
+                        }
+                    }
+                ).then(({
+                    data: {
+                        text
+                    }
+                }) => {
+                    document.getElementById("status").hidden = false;
+                    document.getElementById("complete").hidden = false;
+                    console.log(text);
+                    console.log(text.search("kcal"));
+                    console.log(text.substring(text.search("kcal") - 5, text.indexOf("kcal")));
+                    console.log(text.search("km"));
+                    var x = text.substring(text.search("km") - 5, text.indexOf("km"));
+                    document.getElementById("complete").textContent = "You have running " + x +
+                        " kilometers";
+                    document.getElementById("status").hidden = true;
+                });
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        document.getElementById("complete").hidden = true;
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+</script>
+
+
 </html>
