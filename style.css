@@ -1,4 +1,5 @@
 
+
 /* ==========================================================================
    #Main CSS for every pages
    ========================================================================== */
@@ -10,7 +11,7 @@ html {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 body {
@@ -20,7 +21,7 @@ body {
     height: 100%;
     font-family: Poppins;
     font-weight: 400;
-    background: url(background2.jpg);
+    background: url(images/background2.jpg);
     background-position: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -28,21 +29,21 @@ body {
 }
 
 nav {
-    padding: 8px;
+    padding: 2%;
 }
 
 .logo {
     float: left;
-    padding: 8px;
-    margin-left: 16px;
-    margin-top: 8px;
+    padding: 0;
+    margin-left: 2%;
+    margin-top: 1%;
 }
 
 .logo a {
     color: #000000;
     text-transform: uppercase;
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 5px;
     letter-spacing: 0px;
     text-decoration: none;
 }
@@ -56,7 +57,7 @@ nav ul li {
 }
 
 nav ul li :not(:first-child) {
-    margin-left: 480px;
+    margin-left: 10%;
 }
 
 nav ul li :last-child {
@@ -74,7 +75,7 @@ nav ul li a {
     font-weight: 600;
 }
 
-@media screen and (max-width: 864px) {
+@media screen and (max-width: 100%) {
     .logo {
         padding: 0;
     }
@@ -103,7 +104,7 @@ nav ul li a {
         float: none;
         width: 100%;
         text-align: right;
-        margin-bottom: 10px;
+        margin-bottom: 2%;
     }
 
     .nav-wrapper u li :nth-child(1) a {
@@ -401,6 +402,7 @@ input[type=radio] {
 }
       
 img {
+    padding: 0%;
     max-width: 100%;
     height: auto; 
 }
@@ -410,7 +412,7 @@ figure {
 }
       
 p {
-    margin-bottom: 0px;
+    margin-bottom: 0%;
     font-size: 15px;
     color: #777; 
 }
@@ -430,7 +432,7 @@ h2 {
 }
       
 .container-form {
-        width: 900px;
+        width: 65%;
         background: #fff;
         margin: 0 auto;
         box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
@@ -483,11 +485,11 @@ h2 {
 }
       
 .signup {
-        margin-bottom: 150px; 
+        margin-bottom: 5%; 
 }
       
 .signup-content {
-        padding: 75px 0; 
+        padding: 6% 0; 
 }
       
 .signup-form, .signup-image, .signin-form, .signin-image {
@@ -905,7 +907,8 @@ label.valid:after {
     border: 4px solid lightblue;
     position: relative;
     width: auto;
-    height: 300px;
+    height: auto;
+    padding: 4%;
   }
   
   .image-dropping,
@@ -920,8 +923,9 @@ label.valid:after {
   }
 
   .drag-text {
-      width: 100%;
-      height: 350px;
+      width: auto;
+      height: 250px;
+      padding: 2%;
   }
   
   .drag-p {
@@ -945,6 +949,7 @@ label.valid:after {
     margin-right: auto;
     display: block;
     background-color: white;
+    position: relative;
   }
 
   .user-name {
@@ -954,6 +959,7 @@ label.valid:after {
     height: auto;
     text-align: center;
     font-weight: bold;
+    position: relative;
   }
   .user-table {
     padding: 20px;
@@ -963,37 +969,5 @@ label.valid:after {
       text-align: center;
       background: lightblue;
       border: 1px solid lightblue;
+      position: relative;
   }
-
-
-/* style for aboutus */
-.card-wrapper{
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
-.Oat, .Nan, .Tong{
-  display: table-cell;
-  width: 25%;
-  height: 25%;
-}
-.imgprofile{
-  width: 50%;
-  
-}
-#divProfile{
-  width: 25%;
-  /* height: 25%;*/
-} 
-.txtProfile, .btnPro, .ENFac{
-  color: white;
-}
-.contact{
-  text-align: left;
-  margin-left: 20%;
-  width: 100%;
-  height: 100%;
-}
-.btnPro{
-  margin-top: 20px;
-}
