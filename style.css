@@ -22,7 +22,7 @@ body {
     height: 100%;
     font-family: Poppins;
     font-weight: 400;
-    background-image: url("background2.jpg");
+    background: url("background2.jpg");
     background-position: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
